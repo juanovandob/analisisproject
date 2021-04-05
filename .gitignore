@@ -13,7 +13,8 @@ progress.log
 .local/*
 .profile
 .pythonstartup.py
-.virtualenvs/*
 .vimrc
+.virtualenvs/*
+analisisproject/
 web2py/*
 **/__pycache__
