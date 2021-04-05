@@ -1,0 +1,98 @@
+{{extend 'layout.html'}}
+
+<style>
+  .abs-center {
+  display: flex;
+  /* ALINEADO VERTICAL EN EL CONTENEDOR */
+  /* align-items: center; */
+  justify-content: center;
+  /* min-height: 100vh; */
+  
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+
+<div class="container">
+    <div class="abs-center">
+        <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+            <div>
+                <center>
+                    <img style="width: 30%; display: inline-block;" src={{=URL('static','images/12diaco.jpg')}}/> 
+                </center>
+            </div>
+            <center><small>Bienvenido a la página de quejas de la Dirección de atención y asistencia al consumidor</small></center>
+        </div>      
+  </div>
+<P></P>
+<!-- ESTO ES PARA USAR CON SQLFORM NORMAL SIN AJA
+<div class="container">
+  <div class="abs-center">
+      <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+        <small style="font-weight: bold;">Paso 1 IDENTIFIQUE EL COMERCIO</small>
+            {{=form}}
+      </div>
+    </div>      
+</div> -->
+
+<!-- UTILIZANDO UN FORM NORMAL SIN SQLFORM Y SE CARGAN LOS MUNCIPIOS -->
+<!-- DESPUES DE ELEGIR LOS DEPARTAMENTOS -->
+<!-- Empieza el Container -->
+<div class="container">
+    <div class="abs-center">
+        <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+          <small style="font-weight: bold;">Paso 1 IDENTIFIQUE EL COMERCIO</small>
+          
+          
+          <!-- FORM CON AJAX -->
+        <form enctype="multipart/form-data" action="{{=URL('default','queja')}}" method="post">
+        <div class="form-group row">
+            <label for="input_comercio" class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input_comercio" placeholder="Nombre del comercio" required>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="input_direccion" class="col-sm-2 col-form-label">Dirección</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="input_direcion" placeholder="Dirección del comercio" required>
+            </div>
+        </div>
+            <div class="form-group row">
+                <label for="input_departamento" class="col-sm-2 col-form-label">Departamento</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name='category_name' 
+                        onchange="jQuery('#maker_name').empty();
+                        ajax('maker', ['category_name'], 'maker_name');">
+                        {{for category in categories:}}
+                            <option value="{{=category.id}}" 
+                                {{=" selected='selected'" if str(category.id)==request.vars.category_name else ""}}>
+                            {{=category.name}}
+                            </option>
+                        {{pass}}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="input_municipio" class="col-sm-2 col-form-label">Municipio</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id='maker_name' name='maker_name' >
+                        {{for maker in makers:}}
+                            <option value="{{=maker.id}}" 
+                                {{=XML(" selected='selected'") if str(maker.id)==request.vars.maker_name else ""}}>
+                            {{=maker.name}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+            </div>
+           
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        </div>
+    </div>      
+</div>
+

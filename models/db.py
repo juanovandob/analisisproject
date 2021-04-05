@@ -137,16 +137,41 @@ if configuration.get('scheduler.enabled'):
 #
 # >>> db.define_table('mytable', Field('myfield', 'string'))
 #
-# Fields can be 'string','text','password','integer','double','boolean'
-#       'date','time','datetime','blob','upload', 'reference TABLENAME'
-# There is an implicit 'id integer autoincrement' field
-# Consult manual for more options, validators, etc.
-#
-# More API examples for controllers:
-#
-# >>> db.mytable.insert(myfield='value')
-# >>> rows = db(db.mytable.myfield == 'value').select(db.mytable.ALL)
-# >>> for row in rows: print row.id, row.myfield
+db.define_table('region',
+                Field('name', 'string'),
+                format='%(name)s')
+db.region.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+
+db.define_table('departamento',
+                Field('name', 'string'),
+                Field('fk_region', 'reference region'),
+                format='%(name)s')
+db.departamento.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+
+db.define_table('municipio',
+                Field('name', 'string'),
+                Field('fk_departamento', 'reference departamento'),
+                format='%(name)s')
+db.municipio.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+
+db.define_table('comercio',
+                Field('name', 'string'),
+                Field('direccion', 'string'),
+                Field('fk_departamento', 'reference departamento'),
+                Field('fk_municipio', 'reference municipio'),
+                format='%(name)s')
+db.comercio.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+
+db.define_table('queja',
+                Field('fecha', 'date'),
+                Field('contenido', 'text'),
+                Field('peticion', 'text'),
+                Field('fk_comercio', 'reference comercio'),
+                format='%(name)s')
+db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+db.queja.fecha.requires = IS_DATE(format=T('%Y-%m-%d'), error_message='must be YYYY-MM-DD!')
 # -------------------------------------------------------------------------
 
 # -------------------------------------------------------------------------

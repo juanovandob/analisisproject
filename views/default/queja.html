@@ -1,0 +1,40 @@
+{{extend 'layout.html'}}
+
+<style>
+  .abs-center {
+  display: flex;
+  /* ALINEADO VERTICAL EN EL CONTENEDOR */
+  /* align-items: center; */
+  justify-content: center;
+  /* min-height: 100vh; */
+  
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+<!-- <div class="container-fluid">
+  <h2 class="mt-4">Ingrese los datos del comercio</h2>
+</div> -->
+<div class="container">
+    <div class="abs-center">
+        <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+            <div>
+                <center>
+                    <img style="width: 30%; display: inline-block;" src={{=URL('static','images/12diaco.jpg')}}/> 
+                </center>
+            </div>
+            <center><small>Bienvenido a la página de quejas de la Dirección de atención y asistencia al consumidor</small></center>
+        </div>      
+  </div>
+  <br>
+
+<div class="container">
+  <div class="abs-center">
+      <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+        <small style="font-weight: bold;">Paso 2 INGRESE LA QUEJA</small>
+        <span></span>
+          {{=form}}
+      </div>      
+</div>
