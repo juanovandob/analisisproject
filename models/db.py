@@ -157,7 +157,6 @@ db.municipio.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'
 db.define_table('comercio',
                 Field('name', 'string'),
                 Field('direccion', 'string'),
-                Field('fk_departamento', 'reference departamento'),
                 Field('fk_municipio', 'reference municipio'),
                 format='%(name)s')
 db.comercio.name.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
@@ -168,8 +167,6 @@ db.define_table('queja',
                 Field('peticion', 'text'),
                 Field('fk_comercio', 'reference comercio'),
                 format='%(name)s')
-db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
-db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
 db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
 db.queja.fecha.requires = IS_DATE(format=T('%Y-%m-%d'), error_message='must be YYYY-MM-DD!')
 # -------------------------------------------------------------------------

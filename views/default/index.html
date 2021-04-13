@@ -4,428 +4,57 @@
   <h1>/{{=request.application}}/{{=request.controller}}/{{=request.function}}
 </center> -->
 {{end}}
-{{if 'message' in globals():}}
-<!-- <h2>{{=message}}</h2> -->
-<!-- <h1>Corriendo el proyecto de seminario de Análisis</h1> -->
-<!-- ***** AQUI INICIA EL FORMULARIO********* -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
-<meta name="HandheldFriendly" content="true" />
-<link type="text/css" media="print" rel="stylesheet" href="https://cdn.jotfor.ms/css/printForm.css?3.3.24416" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?themeRevisionID=5f7ed99c2c2c7240ba580251"/>
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/payment/payment_styles.css?3.3.24416" />
-<link type="text/css" rel="stylesheet" href="https://cdn.jotfor.ms/css/styles/payment/payment_feature.css?3.3.24416" />
-<style type="text/css" id="form-designer-style">
-    /* Injected CSS Code */
-/*PREFERENCES STYLE*/
-    .form-all {
-      font-family: Inter, sans-serif;
-    }
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-family: Inter, sans-serif;
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-family: Inter, sans-serif;
-    }
-    .form-header-group {
-      font-family: Inter, sans-serif;
-    }
-    .form-label {
-      font-family: Inter, sans-serif;
-    }
-  
-    .form-label.form-label-auto {
-      
-    display: block;
-    float: none;
-    text-align: left;
-    width: 100%;
-  
-    }
-  
-    .form-line {
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
-  
-    .form-all {
-      max-width: 752px;
-      width: 100%;
-    }
-  
-    .form-label.form-label-left,
-    .form-label.form-label-right,
-    .form-label.form-label-left.form-label-auto,
-    .form-label.form-label-right.form-label-auto {
-      width: 230px;
-    }
-  
-    .form-all {
-      font-size: 16px
-    }
-    .form-all .qq-upload-button,
-    .form-all .qq-upload-button,
-    .form-all .form-submit-button,
-    .form-all .form-submit-reset,
-    .form-all .form-submit-print {
-      font-size: 16px
-    }
-    .form-all .form-pagebreak-back-container,
-    .form-all .form-pagebreak-next-container {
-      font-size: 16px
-    }
-  
-    .supernova .form-all, .form-all {
-      background-color: #fff;
-    }
-  
-    .form-all {
-      color: #2C3345;
-    }
-    .form-header-group .form-header {
-      color: #2C3345;
-    }
-    .form-header-group .form-subHeader {
-      color: #2C3345;
-    }
-    .form-label-top,
-    .form-label-left,
-    .form-label-right,
-    .form-html,
-    .form-checkbox-item label,
-    .form-radio-item label {
-      color: #2C3345;
-    }
-    .form-sub-label {
-      color: #464d5f;
-    }
-  
-    .supernova {
-      background-color: #ecedf3;
-    }
-    .supernova body {
-      background: transparent;
-    }
-  
-    .form-textbox,
-    .form-textarea,
-    .form-dropdown,
-    .form-radio-other-input,
-    .form-checkbox-other-input,
-    .form-captcha input,
-    .form-spinner input {
-      background-color: #fff;
-    }
-  
-    .supernova {
-      background-image: none;
-    }
-    #stage {
-      background-image: none;
-    }
-  
-    .form-all {
-      background-image: none;
-    }
-  
-    .form-all {
-      position: relative;
-    }
-    .form-all:before {
-      content: "";
-      background-image: url("https://www.jotform.com/uploads/guest_40c94a33e3b27348/form_files/12diaco.60655596c61c03.72449425.jpg");
-      display: inline-block;
-      height: 140px;
-      position: absolute;
-      background-size: 334px 140px;
-      background-repeat: no-repeat;
-      width: 100%;
-    }
-    .form-all {
-      margin-top: 160px !important;
-    }
-    .form-all:before {
-      top: -150px;
-      background-position: top center;
-    }
-           
-  .ie-8 .form-all:before { display: none; }
-  .ie-8 {
-    margin-top: auto;
-    margin-top: initial;
+<style>
+  *{
+	margin: 0;
+	padding: 0;
+	font-family: 'Source Serif Pro';
+  }
+
+  .jumbotron{
+                    
+  background-image: url('{{=URL('static','images/diacoterespalda.png')}}');
+	height: 65vh; 
+	background-size: 100% 100%;
+	background-position: center;
+  background-repeat: no-repeat;
+	color: #ffffff;
+	border-radius: 0px !important;
+  }
+
+  .jumbotron h1{
+	margin: 30px 0;
+	font-size: 30px;
+	line-height: 1.5,
   }
   
-  /*PREFERENCES STYLE*//*__INSPECT_SEPERATOR__*/
-    /* Injected CSS Code */
 </style>
 
-<!--La línea que sigue es para el input de fecha -->
-<script src="https://cdn.jotfor.ms/static/prototype.forms.js" type="text/javascript"></script>
-<script src="https://cdn.jotfor.ms/static/jotform.forms.js?3.3.24416" type="text/javascript"></script>
-<script src="https://js.jotform.com/WidgetsServer.js?v=1617254253580" type="text/javascript"></script>
+{{if 'message' in globals():}}
 
-<script type="text/javascript">
-	JotForm.init(function(){
-      JotForm.setPhoneMaskingValidator( 'input_5_full', '(###) ###-####' );
-if (window.JotForm && JotForm.accessible) $('input_11').setAttribute('tabindex',0);
-if (window.JotForm && JotForm.accessible) $('input_12').setAttribute('tabindex',0);
-      JotForm.setCustomHint( 'input_12', 'Type here...' );
-if (window.JotForm && JotForm.accessible) $('input_13').setAttribute('tabindex',0);
-      JotForm.setCustomHint( 'input_13', 'Type here...' );
-	JotForm.newDefaultTheme = true;
-	JotForm.extendsNewTheme = false;
-	JotForm.newPaymentUIForNewCreatedForms = true;
-	JotForm.newPaymentUI = true;
-      JotForm.alterTexts({"ageVerificationError":"Debe ser mayor de {minAge} años para enviar este formulario.","alphabetic":"Este campo solo puede contener letras.","alphanumeric":"Este campo solo puede contener letras y números.","appointmentSelected":"Ha seleccionado {time} del {date}","ccDonationMinLimitError":"La Cantidad Mínima es {minAmount} {currency}","ccInvalidCVC":"El número CVC no es válido.","ccInvalidExpireDate":"La fecha de expiración no es válida","ccInvalidNumber":"El número de su tarjeta de crédito no es válido.","ccMissingDetails":"Please fill up the credit card details.","ccMissingDonation":"Favor ponga valores númericos en la cantidad a donar.","ccMissingProduct":"Por favor seleccione al menos un producto.","characterLimitError":"Demasiados caracteres. El límite es","characterMinLimitError":"Muy pocos caracteres. El mínimum es","confirmClearForm":"¿Está seguro que desea limpiar el formulario?","confirmEmail":"El correo electrónico no coincide","currency":"Este campo sólo puede contener valores de moneda.","cyrillic":"Este campo solo puede contener caracteres cirílicos.","dateInvalid":"Esta fecha no es valida. El formato de fecha es {format}","dateInvalidSeparate":"Esta fecha no es válida. Ponga una {element} válida","dateLimited":"Esta fecha no está disponible.","disallowDecimals":"Por favor, introduzca un número entero.","dragAndDropFilesHere_infoMessage":"Arrastre y suelte archivos aquí","email":"Introduzca una dirección e-mail válida","fillMask":"El valor de este campo debe llenar la mascara","freeEmailError":"No se permiten cuentas de correo gratuitas","generalError":"Existen errores en el formulario, por favor corríjalos antes de continuar.","generalPageError":"Hay errores en esta página. Por favor, corríjalos antes de continuar.","gradingScoreError":"El puntaje total debería ser sólo &amp;quot;menos que&amp;quot; o &amp;quot;igual que&amp;quot;","incompleteFields":"Existen campos requeridos incompletos. Por favor complételos.","inputCarretErrorA":"La entrada no debe ser inferior al valor mínimo:","inputCarretErrorB":"La entrada debe ser menor al valor:","lessThan":"Su puntuación debería ser menor o igual que","maxDigitsError":"El máximo de dígitos permitido es","maxFileSize_infoMessage":"Tamaño de Archivo Máx.","maxSelectionsError":"The maximum number of selections allowed is ","minSelectionsError":"El número mínimo de opciones obligatorias es","multipleFileUploads_emptyError":"El fichero {file} está vacío; por favor, seleccione de nuevo los ficheros sin él.","multipleFileUploads_fileLimitError":"Solo {fileLimit} carga de archivos permitida.","multipleFileUploads_minSizeError":"{file} is demasiado pequeño, el tamaño mínimo de fichero es: {minSizeLimit}.","multipleFileUploads_onLeave":"Se están cargando los ficheros, si cierras ahora, se cancelará dicha carga.","multipleFileUploads_sizeError":"{file} es demasiado grande; el tamaño del archivo no debe superar los {sizeLimit}.","multipleFileUploads_typeError":"El fichero {file} posee una extensión no permitida. Sólo están permitidas las extensiones {extensions}.","multipleFileUploads_uploadFailed":"File upload failed, please remove it and upload the file again.","noSlotsAvailable":"No hay cupos disponibles","noUploadExtensions":"File has no extension file type (e.g. .txt, .png, .jpeg)","numeric":"Este campo sólo admite valores numéricos.","pastDatesDisallowed":"La fecha debe ser futura","pleaseWait":"Por favor, espere ...","required":"Este campo es obligatorio.","requireEveryCell":"Se requieren todas las celdas.","requireEveryRow":"Todas las filas son obligatorias.","requireOne":"Al menos un campo requerido.","restrictedDomain":"This domain is not allowed","slotUnavailable":"{time} del {date} ha sido tomada. Favor seleccionar otro espacio.","uploadExtensions":"Solo puede subir los siguientes archivos:","uploadFilesize":"Tamaño del archivo no puede ser mayor que:","uploadFilesizemin":"Tamañao de archivo no puede ser menos de:","url":"Este campo solo contiene una URL válida.","validateEmail":"You need to validate this e-mail","wordLimitError":"Demasiadas palabras. El límite es","wordMinLimitError":"Muy pocas palabras. El mínimo es"});
-	JotForm.clearFieldOnHide="disable";
-	JotForm.submitError="jumpToFirstError";
-    /*INIT-END*/
-	});
-
-   JotForm.prepareCalculationsOnTheFly([null,null,{"name":"submit2","qid":"2","text":"Enviar","type":"control_button"},{"name":"nombreDe","qid":"3","text":"Nombre de la empresas","type":"control_fullname"},{"name":"email","qid":"4","subLabel":"ejemplo@ejemplo.com","text":"Email","type":"control_email"},{"name":"numeroDe","qid":"5","text":"Numero de telefono","type":"control_phone"},{"name":"firma","qid":"6","text":"Firma","type":"control_signature"},null,null,{"name":"fechaDel","qid":"9","text":"Fecha del incidente","type":"control_widget"},null,{"name":"motivoDe","qid":"11","text":"Motivo de la queja o reclamacion","type":"control_textbox"},{"name":"expongaLos","qid":"12","text":"Exponga los motivos de la queja","type":"control_textarea"},{"name":"aporteUna","qid":"13","text":"Aporte una resolucion al incidente ","type":"control_textarea"},{"name":"direccion","qid":"14","text":"Direccion","type":"control_address"},null,{"name":"escribaUna16","qid":"16","text":"Terms and Conditions","type":"control_widget"}]);
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,null,{"name":"submit2","qid":"2","text":"Enviar","type":"control_button"},{"name":"nombreDe","qid":"3","text":"Nombre de la empresas","type":"control_fullname"},{"name":"email","qid":"4","subLabel":"ejemplo@ejemplo.com","text":"Email","type":"control_email"},{"name":"numeroDe","qid":"5","text":"Numero de telefono","type":"control_phone"},{"name":"firma","qid":"6","text":"Firma","type":"control_signature"},null,null,{"name":"fechaDel","qid":"9","text":"Fecha del incidente","type":"control_widget"},null,{"name":"motivoDe","qid":"11","text":"Motivo de la queja o reclamacion","type":"control_textbox"},{"name":"expongaLos","qid":"12","text":"Exponga los motivos de la queja","type":"control_textarea"},{"name":"aporteUna","qid":"13","text":"Aporte una resolucion al incidente ","type":"control_textarea"},{"name":"direccion","qid":"14","text":"Direccion","type":"control_address"},null,{"name":"escribaUna16","qid":"16","text":"Terms and Conditions","type":"control_widget"}]);}, 20); 
-</script>
-</head>
-<body>
-<form class="jotform-form" action="https://submit.jotform.com/submit/210901196700851/" method="post" name="form_210901196700851" id="210901196700851" accept-charset="utf-8" autocomplete="on">
-  <input type="hidden" name="formID" value="210901196700851" />
-  <input type="hidden" id="JWTContainer" value="" />
-  <input type="hidden" id="cardinalOrderNumber" value="" />
-  <div role="main" class="form-all">
-    <div class="formLogoWrapper Center">
-      <img class="formLogoImg" src="https://www.jotform.com/uploads/guest_40c94a33e3b27348/form_files/12diaco.60655596c61c03.72449425.jpg" height="140" width="334">
+<header>
+	<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <!-- No quitar aqui va la imágen -->  
     </div>
-    <style>
-      .formLogoWrapper { display:inline-block; position: absolute; width: 100%;} .form-all:before { background: none !important;} .formLogoWrapper.Center { top: -150px; text-align: center;}
-    </style>
-    <ul class="form-section page-section">
-      <li class="form-line" data-type="control_widget" id="id_9">
-        <label class="form-label form-label-top form-label-auto" id="label_9" for="input_9"> Fecha del incidente </label>
-        <div id="cid_9" class="form-input-wide" data-layout="full">
-          <div data-widget-name="Selector de Fechas" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field">
-            <iframe data-client-id="52934dbf3be147110a000030" title="Selector de Fechas" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_9" src="" style="max-width:310px;border:none;width:100%;height:40px" data-width="310" data-height="40">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_9" class="form-hidden form-widget  " name="q9_fechaDel" value="" />
-              <input type="hidden" id="widget_settings_9" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22dateFormat%22%2C%22value%22%3A%22m%2Fd%2Fy%22%7D%2C%7B%22name%22%3A%22todayDate%22%2C%22value%22%3A%22Yes%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_9");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(9, {
-          "formID": 210901196700851
-        })
-      }
-    };
-    _cFieldFrame.src = "//widgets.jotform.io/pickers/datepicker.html?qid=9&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host) + '' + '' + '&injectCSS=' + encodeURIComponent(window.location.search.indexOf("ndt=1") > -1);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_fullname" id="id_3">
-        <label class="form-label form-label-top form-label-auto" id="label_3" for="first_3"> Nombre de la empresas </label>
-        <div id="cid_3" class="form-input-wide" data-layout="full">
-          <div data-wrapper-react="true">
-            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="first">
-              <input type="text" id="first_3" name="q3_nombreDe[first]" class="form-textbox" size="10" value="" data-component="first" aria-labelledby="label_3 sublabel_3_first" />
-              <label class="form-sub-label" for="first_3" id="sublabel_3_first" style="min-height:13px" aria-hidden="false"> Nombre </label>
-            </span>
-            <span class="form-sub-label-container" style="vertical-align:top" data-input-type="last">
-              <input type="text" id="last_3" name="q3_nombreDe[last]" class="form-textbox" size="15" value="" data-component="last" aria-labelledby="label_3 sublabel_3_last" />
-              <label class="form-sub-label" for="last_3" id="sublabel_3_last" style="min-height:13px" aria-hidden="false"> Apellido </label>
-            </span>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_email" id="id_4">
-        <label class="form-label form-label-top form-label-auto" id="label_4" for="input_4"> Email </label>
-        <div id="cid_4" class="form-input-wide" data-layout="half">
-          <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="email" id="input_4" name="q4_email" class="form-textbox validate[Email]" style="width:310px" size="310" value="" data-component="email" aria-labelledby="label_4 sublabel_input_4" />
-            <label class="form-sub-label" for="input_4" id="sublabel_input_4" style="min-height:13px" aria-hidden="false"> ejemplo@ejemplo.com </label>
-          </span>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_phone" id="id_5">
-        <label class="form-label form-label-top form-label-auto" id="label_5" for="input_5_full"> Número de teléfono </label>
-        <div id="cid_5" class="form-input-wide" data-layout="half">
-          <span class="form-sub-label-container" style="vertical-align:top">
-            <input type="tel" id="input_5_full" name="q5_numeroDe[full]" data-type="mask-number" class="mask-phone-number form-textbox validate[Fill Mask]" style="width:310px" data-masked="true" value="" placeholder="(000) 000-0000" data-component="phone" aria-labelledby="label_5 sublabel_5_masked" />
-            <label class="form-sub-label" for="input_5_full" id="sublabel_5_masked" style="min-height:13px" aria-hidden="false"> Favor ingrese un número de teléfono válido. </label>
-          </span>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_address" id="id_14">
-        <label class="form-label form-label-top form-label-auto" id="label_14" for="input_14_addr_line1"> Dirección </label>
-        <div id="cid_14" class="form-input-wide" data-layout="full">
-          <div summary="" class="form-address-table jsTest-addressField">
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-street-line jsTest-address-lineField">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_14_addr_line1" name="q14_direccion[addr_line1]" class="form-textbox form-address-line" value="" data-component="address_line_1" aria-labelledby="label_14 sublabel_14_addr_line1" required="" />
-                  <label class="form-sub-label" for="input_14_addr_line1" id="sublabel_14_addr_line1" style="min-height:13px" aria-hidden="false"> Dirección de la calle </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-street-line jsTest-address-lineField">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_14_addr_line2" name="q14_direccion[addr_line2]" class="form-textbox form-address-line" value="" data-component="address_line_2" aria-labelledby="label_14 sublabel_14_addr_line2" />
-                  <label class="form-sub-label" for="input_14_addr_line2" id="sublabel_14_addr_line2" style="min-height:13px" aria-hidden="false"> Dirección de la calle Línea 2 </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-city-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_14_city" name="q14_direccion[city]" class="form-textbox form-address-city" value="" data-component="city" aria-labelledby="label_14 sublabel_14_city" required="" />
-                  <label class="form-sub-label" for="input_14_city" id="sublabel_14_city" style="min-height:13px" aria-hidden="false"> Ciudad </label>
-                </span>
-              </span>
-              <span class="form-address-line form-address-state-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_14_state" name="q14_direccion[state]" class="form-textbox form-address-state" value="" data-component="state" aria-labelledby="label_14 sublabel_14_state" required="" />
-                  <label class="form-sub-label" for="input_14_state" id="sublabel_14_state" style="min-height:13px" aria-hidden="false"> Estado / Provincia </label>
-                </span>
-              </span>
-            </div>
-            <div class="form-address-line-wrapper jsTest-address-line-wrapperField">
-              <span class="form-address-line form-address-zip-line jsTest-address-lineField ">
-                <span class="form-sub-label-container" style="vertical-align:top">
-                  <input type="text" id="input_14_postal" name="q14_direccion[postal]" class="form-textbox form-address-postal" value="" data-component="zip" aria-labelledby="label_14 sublabel_14_postal" required="" />
-                  <label class="form-sub-label" for="input_14_postal" id="sublabel_14_postal" style="min-height:13px" aria-hidden="false"> Código Postal </label>
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_textbox" id="id_11">
-        <label class="form-label form-label-top form-label-auto" id="label_11" for="input_11"> Motivo de la queja o reclamación </label>
-        <div id="cid_11" class="form-input-wide" data-layout="half">
-          <input type="text" id="input_11" name="q11_motivoDe" data-type="input-textbox" class="form-textbox" style="width:310px" size="310" value="" data-component="textbox" aria-labelledby="label_11" />
-        </div>
-      </li>
-      <li class="form-line" data-type="control_textarea" id="id_12">
-        <label class="form-label form-label-top form-label-auto" id="label_12" for="input_12"> Exponga los motivos de la queja </label>
-        <div id="cid_12" class="form-input-wide" data-layout="full">
-          <textarea id="input_12" class="form-textarea" name="q12_expongaLos" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_12"></textarea>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_textarea" id="id_13">
-        <label class="form-label form-label-top form-label-auto" id="label_13" for="input_13"> Aporte una resolución al incidente </label>
-        <div id="cid_13" class="form-input-wide" data-layout="full">
-          <textarea id="input_13" class="form-textarea" name="q13_aporteUna" style="width:648px;height:163px" data-component="textarea" aria-labelledby="label_13"></textarea>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_signature" id="id_6">
-        <label class="form-label form-label-top form-label-auto" id="label_6" for="input_6"> Firma </label>
-        <div id="cid_6" class="form-input-wide" data-layout="half">
-          <div data-wrapper-react="true">
-            <div id="signature_pad_6" class="signature-pad-wrapper" style="width:312px;height:116px">
-              <div data-wrapper-react="true">
-                <!--[if IE 7]>
-                  <script type="text/javascript" src="/js/vendor/json2.js"></script>
-                <![endif]-->
-              </div>
-              <div class="signature-line signature-wrapper signature-placeholder" data-component="signature" style="width:312px;height:116px">
-                <div id="sig_pad_6" data-width="310" data-height="114" data-id="6" data-required="false" class="pad ">
-                </div>
-                <input type="hidden" name="q6_firma" class="output4" id="input_6" />
-              </div>
-              <span class="clear-pad-btn clear-pad" role="button" tabindex="0">
-                Limpiar
-              </span>
-            </div>
-            <div data-wrapper-react="true">
-              <script type="text/javascript">
-              window.signatureForm = true
-              </script>
-            </div>
-          </div>
-        </div>
-      </li>
-      <li class="form-line jf-required" data-type="control_widget" id="id_16">
-        <div id="cid_16" class="form-input-wide termsAndConditionsV2 jf-required" data-layout="full">
-          <div data-widget-name="Términos y Condiciones" style="width:100%;text-align:Left;overflow-x:auto" data-component="widget-field">
-            <iframe data-client-id="52948fb29322cd302b00000c" title="Términos y Condiciones" frameBorder="0" scrolling="no" allowtransparency="true" allow="geolocation; microphone; camera; autoplay; encrypted-media; fullscreen" data-type="iframe" class="custom-field-frame" id="customFieldFrame_16" src="" style="max-width:580px;border:none;width:100%;height:50px" data-width="580" data-height="50">
-            </iframe>
-            <div class="widget-inputs-wrapper">
-              <input type="hidden" id="input_16" class="form-hidden form-widget widget-required " name="q16_escribaUna16" value="" />
-              <input type="hidden" id="widget_settings_16" class="form-hidden form-widget-settings" value="%5B%7B%22name%22%3A%22termsText%22%2C%22value%22%3A%22Estoy%20de%20acuerdo%20con%20los%20%7Bt%C3%A9rminos%20y%20condiciones%7D.%22%7D%2C%7B%22name%22%3A%22termsLink%22%2C%22value%22%3A%22https%3A%2F%2Fdrive.google.com%2Ffile%2Fd%2F1w1-gMcB-njX9VBCS0QXhpaynXAcOZf9B%2Fview%3Fusp%3Dsharing%22%7D%2C%7B%22name%22%3A%22theme%22%2C%22value%22%3A%22predeterminado%22%7D%2C%7B%22name%22%3A%22acceptedText%22%2C%22value%22%3A%22Aceptado%22%7D%5D" data-version="2" />
-            </div>
-            <script type="text/javascript">
-            setTimeout(function()
-{
-  var _cFieldFrame = document.getElementById("customFieldFrame_16");
-  if (_cFieldFrame)
-  {
-    _cFieldFrame.onload = function()
-    {
-      if (typeof widgetFrameLoaded !== 'undefined')
-      {
-        widgetFrameLoaded(16, {
-          "formID": 210901196700851
-        })
-      }
-    };
-    _cFieldFrame.src = "//app-widgets.jotform.io/termsConditions/?qid=16&ref=" + encodeURIComponent(window.location.protocol + "//" + window.location.host) + '&ndt=1' + '' + '&injectCSS=' + encodeURIComponent(window.location.search.indexOf("ndt=1") > -1);
-    _cFieldFrame.addClassName("custom-field-frame-rendered");
-  }
-}, 0);
-            </script>
-          </div>
-        </div>
-      </li>
-      <li class="form-line" data-type="control_button" id="id_2">
-        <div id="cid_2" class="form-input-wide" data-layout="full">
-          <div data-align="auto" class="form-buttons-wrapper form-buttons-auto   jsTest-button-wrapperField">
-            <button id="input_2" type="submit" class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button" data-content="">
-              Enviar
-            </button>
-          </div>
-        </div>
-      </li>
-      <li style="display:none">
-        Should be Empty:
-        <input type="text" name="website" value="" />
-      </li>
-    </ul>
   </div>
-  <script>
-  JotForm.showJotFormPowered = "new_footer";
-  </script>
-  <script>
-  JotForm.poweredByText = "Desarrollado por JotForm";
-  </script>
-  <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="210901196700851" />
-  <script type="text/javascript">
-  var all_spc = document.querySelectorAll("form[id='210901196700851'] .si" + "mple" + "_spc");
-for (var i = 0; i < all_spc.length; i++)
-{
-  all_spc[i].value = "210901196700851-210901196700851";
-}
-  </script>
-  <div class="formFooter-heightMask">
-  </div>
+</header>
+
+<div class="text-center">
+		<a href="{{=URL('default','queja')}}" class="btn btn-primary btn-lg">Presentar una Queja</a>
+		<a href="{{=URL('default','queja')}}" class="btn btn-secondary btn-lg">Observar Estadísticas</a>
+</div>
+
+
   
+
+
 
 {{elif 'content' in globals():}}
 {{=content}}
 {{else:}}
 {{=BEAUTIFY(response._vars)}}
 {{pass}}
+
+
+<!-- url('{{=URL('static','images/12diaco.jpg')}}'); -->
