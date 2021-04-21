@@ -1,10 +1,28 @@
 {{extend 'layout.html'}}
-{{block header}}
-<!-- <center style="background-color: #333; color:white; padding:30px">
-  <h1>/{{=request.application}}/{{=request.controller}}/{{=request.function}}
-</center> -->
-{{end}}
-{{if 'message' in globals():}}
-<h2>{{=message}}</h2>
-<h1>Página de estadistica</h1>
-{{pass}}
+{{extend 'sidebar_layout.html'}}
+
+<style>
+  .abs-center {
+  display: flex;
+  /* ALINEADO VERTICAL EN EL CONTENEDOR */
+  /* align-items: center; */
+  justify-content: center;
+  /* min-height: 100vh; */
+  
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+
+<div class="container" style="padding-top: 1%;">
+  <div class="abs-center">
+      <div class="form_div" style="border:1px solid #cecece; padding: 2%; border-radius: 10px;">
+          <center><img src="{{=URL('static','images/logodiaco1544.jpg')}}" alt="LogoDiaco"></center>
+      </div>      
+</div>
+
+<div class="container-fluid">
+  <center><h2 class="mt-4">En esta página puede elegir el tipo de informe a consultar</h2></center>
+</div>

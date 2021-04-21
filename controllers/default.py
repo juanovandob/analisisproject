@@ -5,6 +5,9 @@
 # -------------------------------------------------------------------------
 
 # ---- example index page ----
+from gluon.globals import Request
+
+
 def index():
      #response.flash = T("Hello World")
      return dict(message=T('Welcome to web2py!'))
@@ -62,9 +65,7 @@ def comercio():
     form_comercio= SQLFORM(db.comercio,
                             labels ={'name':'Nombre','direccion':'Dirección',
                                     'fk_municipio':'Municipio'})
-    #form_comercio = SQLFORM.grid(db.comercio, fields=[db.comercio.name, db.comercio.direccion],
-    #                              headers={'name': 'Nombre Comercio', 'direccion': 'Dirección'}, csv=False)
-    
+        
     #LO QUE SIGUE INCLUYENDO LA FUNCION def makers() sirve para elegir muncipios acorde al departamento
     #elegido y su posterior inserción en la base de datos.
     if request.vars.maker_name:
@@ -79,7 +80,7 @@ def comercio():
         
         insert_comercio = db.comercio.validate_and_insert(name=comercio_name, direccion=comercio_direccion, fk_municipio=comercio_municipio)      
         
-        return redirect(URL('default', 'queja'))
+        return redirect(URL('queja', vars=dict(comercio_name=comercio_name)))
 
     else:
         #lists = db(db.Product.Maker_ID==1).select(db.Product.ALL)
@@ -95,9 +96,8 @@ def comercio():
     else:
         makers = db(db.municipio.fk_departamento==1).select(db.municipio.ALL)
     #return dict(lists=lists, categories=departamentos, makers=makers, themakers=municipios)
-    return dict(form=form_comercio, categories=departamentos,themakers=municipios, makers=makers, message=T('Welcome to web2py!'))
-
-    #return dict(form=form_comercio)
+    return dict(form=form_comercio, categories=departamentos,themakers=municipios, makers=makers)
+    
 
 def maker():
     makers = db(db.municipio.fk_departamento==request.vars.category_name).select(db.municipio.ALL)
@@ -108,12 +108,15 @@ def maker():
     return XML(result)
 
 def queja():
+    comercio_name = request.vars['comercio_name'] 
+    comer= db(db.comercio.name==comercio_name).select().first() 
+    
     form_queja= SQLFORM(db.queja,
                             labels ={'fecha':'Fecha','contenido':'Queja',
                                     'peticion':'Petición','fk_comercio':'Comercio'})
     if form_queja.process().accepted:
        response.flash = 'SU QUEJA HA SIDO REGISTRADA GRACIAS'
-       return redirect(URL('default', 'index'))
+       return redirect(URL('default', 'confirmacion'))
     elif form_queja.errors:
        response.flash = 'El formulario tiene errores'
     else:
@@ -124,7 +127,12 @@ def queja():
     return dict(form=form_queja)
 
 def estadistica():
-     return dict(message=T('Estadísticas!'))
+    formulario=''
+    return dict(message=T('Estadísticas!'), form=formulario)
 
+def norte():
+    return locals()
 
+def confirmacion():
+    return dict(message=T('Welcome to web2py!'))
     

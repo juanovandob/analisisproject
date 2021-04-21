@@ -1,0 +1,123 @@
+{{extend 'layout.html'}}
+
+{{block header}}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Simple Sidebar - Start Bootstrap Template</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+<style>
+    #wrapper {
+    overflow-x: hidden;
+    }
+
+    #sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    -webkit-transition: margin .25s ease-out;
+    -moz-transition: margin .25s ease-out;
+    -o-transition: margin .25s ease-out;
+    transition: margin .25s ease-out;
+    }
+
+    #sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    }
+
+    #sidebar-wrapper .list-group {
+    width: 15rem;
+    }
+
+    #page-content-wrapper {
+    min-width: 100vw;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+    }
+
+    @media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+    
+</style>
+{{end}}
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+        <div class="sidebar-heading"><span style="font-weight:bold"></span></div>
+            <div class="list-group list-group-flush">
+                <a href="" class="list-group-item list-group-item-action bg-light"><strong>CONTEO DE QUEJAS</strong></a>
+                <a href="{{=URL('default','norte')}}" class="list-group-item list-group-item-action bg-light"><li>Región Norte</li></a>
+                <a href="{{=URL('default','sur')}}" class="list-group-item list-group-item-action bg-light"><li>Región Sur</li></a>
+                <a href="{{=URL('default','oriente')}}" class="list-group-item list-group-item-action bg-light"><li>Región Oriente</li></a>
+            <div class="dropdown show">
+                <a class="dropdown-toggle list-group-item list-group-item-action bg-light" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <strong>DETALLE DE QUEJAS</strong></a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#">Comercio</a>
+                        <a class="dropdown-item" href="#">Municipio</a>
+                        <a class="dropdown-item" href="#">Departamento</a>
+                        <a class="dropdown-item" href="#">Región</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <button class="btn btn-primary" id="menu-toggle">Ocultar Menu</button>
+      </nav>
+
+      
+        <!-- CONTENIDO DE LA PAGINA AQUI -->
+        {{include}}
+       
+        
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+</body>
+
+</html>
