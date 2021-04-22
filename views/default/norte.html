@@ -18,21 +18,33 @@
 </div>
 
 <div class="container-fluid">
-        <div class="row abs-center">
-    <div id="MychartContainer" style="height: 400px; width: 70%;">
-        <canvas id="myChart"></canvas>
+    <div class="row abs-center">
+        <div id="MychartContainer" style="height: 400px; width: 70%;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</div>
+<br>
+<!--INICIA GRID-->
+<div class="container-fluid">
+    <div class="row abs-center">
+        <div id="Mygrid" style="height: 400px; width: 70%;">
+            <center>{{=mygrid}}</center>
+        </div>
     </div>
 </div>
 
+
 <script>
+    // str.replace(new RegExp("&"+"#"+"x27;", "g"), "'")
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: {{=XML(labels)}}, // solo esto cambie parra que reciba datos coloqué XML, porque aunque en python escribre ['cosa','cosa2'], aquí no reconocía los ''
             datasets: [{
                 label: 'Cantidad de Quejas',
-                data: [12, 19, 3, 5, 2, 3],
+                data: {{=data}},   //Solo esto cambié para que reciba los datos de web2py
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

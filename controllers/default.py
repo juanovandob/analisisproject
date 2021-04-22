@@ -131,7 +131,69 @@ def estadistica():
     return dict(message=T('Estadísticas!'), form=formulario)
 
 def norte():
-    return locals()
+    from gluon.serializers import json
+    msg = "def norte"
+    consulta = db(db.queja).select().first()
+    row = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='NORTE')&
+            (db.queja.fecha >='2021-01-01 00:00:00')
+            ).select(
+                db.queja.fecha, 
+                db.comercio.name,
+                orderby=~db.queja.fecha
+            )
+
+    count = db.queja.id.count()
+
+    row_count = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='NORTE')&
+            (db.queja.fecha >='2021-01-01 00:00:00')
+            ).select(
+                db.comercio.name,
+                count,
+                groupby = db.comercio.name,
+                orderby= ~db.queja.fecha,
+            )
+    
+    #Del query que obtiene la agrupación y conteo de quejas por comercio, se crean dos 
+    #una para labels y otra para data.
+    #COMO EL ROW DEVUELVE UN CAMPO '_extra': '{COUNT("queja"."id")'} se hizo _extra[count]  count = a la consulta
+    #que regresa el conteo que en este caso es queja.id por eso se sustituye alli.
+    #https://www.pythonstudio.us/web2py/grouping-and-counting.html
+    labels=[]
+    data=[]    
+    for line in row_count:
+        labels.append(line.comercio.name)
+        data.append(line._extra[count])
+    print("que onda?")
+    print(labels)
+    json_labels = json(labels)
+                 
+    #*******EMPIEZA SQLFORM.grid personalizado ***************
+    #Query para mostrar en el SQLFORM.grid No utiliza select porque así lo pide SQLFORM.grid
+    elquery = (( (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='NORTE')&
+            (db.queja.fecha >='2021-01-01 00:00:00')
+              ))
+    
+    fields = (db.queja.fecha, db.queja.fk_comercio, db.queja.contenido)
+   
+    grid = SQLFORM.grid(query=elquery, fields=fields, csv=False, deletable=True,  searchable=True)
+     #*******FINALIZA SQLFORM.grid personalizado ***************
+    
+    return dict(mygrid=grid, labels=labels, data=data, mensaje = msg)
+
 
 def confirmacion():
     return dict(message=T('Welcome to web2py!'))
