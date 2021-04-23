@@ -200,13 +200,13 @@ def sur():
     # ******** Aquí empieza la consulta ********   
     count = db.queja.id.count()
 
-    row_count = db(
+    row_sur = db(
             (db.queja.fk_comercio==db.comercio.id)&
             (db.comercio.fk_municipio==db.municipio.id)&
             (db.municipio.fk_departamento==db.departamento.id)&
             (db.departamento.fk_region==db.region.id)&
             (db.region.name=='SUR')&
-            (db.queja.fecha >='2021-01-01 00:00:00')
+            (db.queja.fecha >='2021-01-01 00:00:00')            
             ).select(
                 db.comercio.name,
                 count,
@@ -214,12 +214,12 @@ def sur():
                 orderby= ~db.queja.fecha,
             )
     # **********Finaliza consulta **********************
-
+    
     #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
     # y la cantidad de veces que se ha colocado una queja   data[]
     labels=[]
     data=[]    
-    for line in row_count:
+    for line in row_sur:
         labels.append(line.comercio.name)
         data.append(line._extra[count])
         
@@ -262,6 +262,45 @@ def oriente():
        
     return dict(mygrid=grid, registros= row_count, mensaje = msg)
 
+def region():
+    count = db.queja.id.count()
+    # Consulta para la gráfica
+    row_region = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)
+            ).select(
+                db.region.name,
+                count,
+                groupby = db.region.name,
+                orderby= ~db.queja.fecha,
+            )
+    # **********Finaliza consulta **********************
+    #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
+    # y la cantidad de veces que se ha colocado una queja   data[]
+    labels=[]
+    data=[]    
+    for line in row_region:
+        labels.append(line.region.name)
+        data.append(line._extra[count])
+
+    # ****Consulta para la tabla ***********
+    # Consulta de quejas por region. Ordenados por region - Obtiene fecha de la queja, nombre del comercio y region a la que pertenece    
+    row_region_table = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)
+            ).select(
+                db.queja.fecha,
+                db.comercio.name,
+                db.region.name,
+                groupby = db.comercio.name,
+                orderby= ~db.region.name,
+            )
+
+    return dict(msg='Region',labels=labels, data=data, registros= row_region_table)
 
 def confirmacion():
     return dict(message=T('Welcome to web2py!'))

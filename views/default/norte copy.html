@@ -1,0 +1,77 @@
+{{extend 'layout.html'}}
+{{extend 'sidebar_layout.html'}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+<style>
+  .abs-center {
+  display: flex;
+    justify-content: center;
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+
+<div class="container-fluid">
+  <center><h2 class="mt-4">Conteo de quejas por comercio-sucursal región norte</h2></center>
+</div>
+
+<div class="container-fluid">
+    <div class="row abs-center">
+        <div id="MychartContainer" style="height: 400px; width: 70%;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+</div>
+<br>
+<!--INICIA GRID-->
+<div class="container-fluid">
+    <div><center><h3>Detalle de Quejas</h3></center></div>
+    <div class="row abs-center">
+        
+        <div id="Mygrid" style="height: 400px; width: 70%;">
+            <center>{{=mygrid}}</center>
+        </div>
+    </div>
+</div>
+
+<script>
+    // str.replace(new RegExp("&"+"#"+"x27;", "g"), "'")
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{=XML(labels)}}, // solo esto cambie parra que reciba datos coloqué XML, porque aunque en python escribre ['cosa','cosa2'], aquí no reconocía los ''
+            datasets: [{
+                label: 'Cantidad de Quejas',
+                data: {{=data}},   //Solo esto cambié para que reciba los datos de web2py
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>
+
