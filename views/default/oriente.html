@@ -1,0 +1,47 @@
+{{extend 'layout.html'}}
+{{extend 'sidebar_layout.html'}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+<style>
+  .abs-center {
+  display: flex;
+    justify-content: center;
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+
+<br>
+<!--INICIA GRID-->
+
+<div class="container-fluid">
+    <div><center><h3>COMERCIOS SIN QUEJAS DURANTE ESTE AÑO</h3></center></div>
+    <div><center><h3>REGION ORIENTE</h3></center></div>
+    <div class="row abs-center">
+        
+        <div id="Mygrid" style="height: 400px; width: 70%;">
+            <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Nombre Comercio</th>
+                    <th scope="col">Municipio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {{id=1}}
+                    {{for registro in registros:}}
+                    <tr>
+                        <th scope="row">{{=id}}{{id+=1}}</th>
+                        <th scope="row">{{=registro.comercio.name}}</th>
+                        <td>{{=registro.municipio.name}}</td>
+                    </tr>
+                    {{pass}}
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+

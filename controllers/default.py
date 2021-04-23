@@ -131,22 +131,23 @@ def estadistica():
     return dict(message=T('Estadísticas!'), form=formulario)
 
 def norte():
-    from gluon.serializers import json
     msg = "def norte"
     consulta = db(db.queja).select().first()
-    row = db(
-            (db.queja.fk_comercio==db.comercio.id)&
-            (db.comercio.fk_municipio==db.municipio.id)&
-            (db.municipio.fk_departamento==db.departamento.id)&
-            (db.departamento.fk_region==db.region.id)&
-            (db.region.name=='NORTE')&
-            (db.queja.fecha >='2021-01-01 00:00:00')
-            ).select(
-                db.queja.fecha, 
-                db.comercio.name,
-                orderby=~db.queja.fecha
-            )
-
+    #ESTE NO ESTÁ EN USO LO DEJO PARA CONSULTAS /Devuelve las quejas correspondientes a los
+    #comercios de la region norte que tuvieron quejas el ultimo año
+    # row = db(
+    #         (db.queja.fk_comercio==db.comercio.id)&
+    #         (db.comercio.fk_municipio==db.municipio.id)&
+    #         (db.municipio.fk_departamento==db.departamento.id)&
+    #         (db.departamento.fk_region==db.region.id)&
+    #         (db.region.name=='NORTE')&
+    #         (db.queja.fecha >='2021-01-01 00:00:00')
+    #         ).select(
+    #             db.queja.fecha, 
+    #             db.comercio.name,
+    #             orderby=~db.queja.fecha
+    #         )
+    #Esta es una condición de web2py para hacer el conteo. después se coloca dentro del select.
     count = db.queja.id.count()
 
     row_count = db(
@@ -173,9 +174,7 @@ def norte():
     for line in row_count:
         labels.append(line.comercio.name)
         data.append(line._extra[count])
-    print("que onda?")
-    print(labels)
-    json_labels = json(labels)
+        
                  
     #*******EMPIEZA SQLFORM.grid personalizado ***************
     #Query para mostrar en el SQLFORM.grid No utiliza select porque así lo pide SQLFORM.grid
@@ -193,6 +192,75 @@ def norte():
      #*******FINALIZA SQLFORM.grid personalizado ***************
     
     return dict(mygrid=grid, labels=labels, data=data, mensaje = msg)
+
+def sur():
+    msg = "def sur"
+
+    #Conteo de quejas de los comercios de la region sur del año 2021
+    # ******** Aquí empieza la consulta ********   
+    count = db.queja.id.count()
+
+    row_count = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='SUR')&
+            (db.queja.fecha >='2021-01-01 00:00:00')
+            ).select(
+                db.comercio.name,
+                count,
+                groupby = db.comercio.name,
+                orderby= ~db.queja.fecha,
+            )
+    # **********Finaliza consulta **********************
+
+    #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
+    # y la cantidad de veces que se ha colocado una queja   data[]
+    labels=[]
+    data=[]    
+    for line in row_count:
+        labels.append(line.comercio.name)
+        data.append(line._extra[count])
+        
+                 
+    #*******EMPIEZA SQLFORM.grid personalizado ***************
+    elquery = (( (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='SUR')&
+            (db.queja.fecha >='2021-01-01 00:00:00')
+              ))
+    
+    fields = (db.queja.fecha, db.queja.fk_comercio, db.queja.contenido)
+   
+    grid = SQLFORM.grid(query=elquery, fields=fields, csv=False, deletable=True,  searchable=True)
+     #*******FINALIZA SQLFORM.grid personalizado ***************
+    
+    return dict(mygrid=grid, labels=labels, data=data, mensaje = msg)
+
+def oriente():
+    msg = "def oriente"
+
+    #Comercios que no recibieron quejas durante 2021 oriente
+    # ******** Aquí empieza la consulta ********   
+    row_count = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.region.name=='ORIENTE')&
+            (db.queja.fecha.year() != 2021)
+            ).select(
+                db.comercio.name,
+                db.municipio.name,
+                groupby = db.comercio.name,
+                orderby= ~db.comercio.name,
+            )
+    # **********Finaliza consulta **********************
+       
+    return dict(mygrid=grid, registros= row_count, mensaje = msg)
 
 
 def confirmacion():
