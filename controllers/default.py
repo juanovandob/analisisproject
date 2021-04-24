@@ -301,6 +301,157 @@ def region():
             )
 
     return dict(msg='Region',labels=labels, data=data, registros= row_region_table)
+    #FIN REGION
+
+def departamento():
+    count = db.queja.id.count()
+    # Consulta para la gráfica
+    row_departamento = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)
+            ).select(
+                db.departamento.name,
+                count,
+                groupby = db.departamento.name,
+                orderby= ~db.queja.fecha,
+            )
+    # **********Finaliza consulta **********************
+    #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
+    # y la cantidad de veces que se ha colocado una queja   data[]
+    labels=[]
+    data=[]    
+    for line in row_departamento:
+        labels.append(line.departamento.name)
+        data.append(line._extra[count])
+
+    # ****Consulta para la tabla ***********
+    # Consulta de quejas por region. Ordenados por region - Obtiene fecha de la queja, nombre del comercio y region a la que pertenece    
+    row_departamento_table = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)
+            ).select(
+                db.queja.fecha,
+                db.comercio.name,
+                db.departamento.name,
+                groupby = db.comercio.name,
+                orderby= db.departamento.name,
+            )
+
+    return dict(msg='Region',labels=labels, data=data, registros= row_departamento_table)
+    #FIN DEPARTAMENTO
+
+def municipio():
+    #Consulta para elegir departamentos
+    dep = None
+    departamentos = db().select(db.departamento.ALL)
+
+    if request.vars:
+        dep = request.vars.get("departamento_name")
+        
+
+    #comercio_name = request.vars.get("nom_comercio")
+
+
+    #form_elegir_dep = SQLFORM(db.departamento,
+    #                        labels ={'name':'Elija el departamento',})
+
+    #if form_elegir_dep.process().accepted:
+    #   response.flash = 'SU QUEJA HA SIDO REGISTRADA GRACIAS'
+    #   return redirect(URL('default', 'confirmacion'))
+    #elif form_elegir_dep.errors:
+    #   response.flash = 'El formulario tiene errores'
+    #else:
+    #   response.flash = 'Por favor complete el formulario'
+    
+
+    count = db.queja.id.count()
+    # Consulta para la gráfica
+    row_departamento = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.departamento.id==dep)
+            ).select(
+                db.municipio.name,
+                count,
+                groupby = db.municipio.name,
+                orderby= ~db.queja.fecha,
+            )
+    # **********Finaliza consulta **********************
+    #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
+    # y la cantidad de veces que se ha colocado una queja   data[]
+    labels=[]
+    data=[]    
+    for line in row_departamento:
+        labels.append(line.municipio.name)
+        data.append(line._extra[count])
+
+    # ****Consulta para la tabla ***********
+    # Consulta de quejas por region. Ordenados por region - Obtiene fecha de la queja, nombre del comercio y region a la que pertenece    
+    row_departamento_table = db(
+            (db.queja.fk_comercio==db.comercio.id)&
+            (db.comercio.fk_municipio==db.municipio.id)&
+            (db.municipio.fk_departamento==db.departamento.id)&
+            (db.departamento.fk_region==db.region.id)&
+            (db.departamento.id==dep)
+            ).select(
+                db.queja.fecha,
+                db.comercio.name,
+                db.municipio.name,
+                groupby = db.comercio.name,
+                orderby= db.departamento.name,
+            )
+
+    return dict(departamento=departamentos, dep_id =dep, labels=labels, data=data, registros= row_departamento_table)
+    #FIN municipio
+
+def rango_fecha():
+    #Consulta para elegir departamentos
+    import datetime
+    dep = None
+    fecha_inicial = None
+    fecha_final = None
+    departamentos = db().select(db.departamento.ALL)
+
+    form_rango= SQLFORM(db.rango,
+                            labels ={'fecha_inicial':'Fecha Inicial','fecha_final':'Fecha Final'})
+    
+    #con form_rango.validate() se logró que solo envie los datos acá sin mandarlos a la base de datos directamente del SQLFORM
+    if form_rango.validate():
+        fecha_inicial = request.vars.get("fecha_inicial")
+        fecha_final = request.vars.get("fecha_final")
+        dep = True
+
+        #Como fecha inicial es string en d/m/y se tuvo que convertir a un objeto date.time Y-d-d
+        #Arriba en el inicio de la función hay un import sino no funciona
+        fecha_inicial_obj = datetime.datetime.strptime(fecha_inicial, "%d/%m/%Y").strftime("%Y-%m-%d")
+        fecha_final_obj = datetime.datetime.strptime(fecha_final, "%d/%m/%Y").strftime("%Y-%m-%d")
+
+        # ****Consulta para la tabla ***********
+        # Consulta de quejas por region. Ordenados por region - Obtiene fecha de la queja, nombre del comercio y region a la que pertenece    
+        row_departamento_table = db(
+                (db.queja.fk_comercio==db.comercio.id)&
+                (db.comercio.fk_municipio==db.municipio.id)&
+                (db.municipio.fk_departamento==db.departamento.id)&
+                (db.departamento.fk_region==db.region.id)&
+                (db.queja.fecha >= fecha_inicial_obj)&
+                (db.queja.fecha <= fecha_final_obj)
+                ).select(
+                    db.queja.fecha,
+                    db.comercio.name,
+                    db.municipio.name,
+                    groupby = db.comercio.name,
+                    orderby= ~db.queja.fecha,
+                )
+        return dict(dep_id =dep, registros= row_departamento_table)
+
+    return dict(form=form_rango, dep_id =dep)
+    #FIN rango_fecha
 
 def confirmacion():
     return dict(message=T('Welcome to web2py!'))

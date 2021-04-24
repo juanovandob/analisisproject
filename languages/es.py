@@ -12,6 +12,7 @@
 '%s selected': '%s %%{seleccionado}',
 '%Y-%m-%d': '%d/%m/%Y',
 '%Y-%m-%d %H:%M:%S': '%d/%m/%Y %H:%M:%S',
+'%Y/%m/%d': '%Y/%m/%d',
 '(**%.0d MB**)': '(**%.0d MB**)',
 '(something like "it-it")': '(algo como "it-it")',
 '**%(items)s** %%{item(items)}, **%(bytes)s** %%{byte(bytes)}': '**%(items)s** %%{item(items)}, **%(bytes)s** %%{byte(bytes)}',

@@ -1,0 +1,119 @@
+{{extend 'layout.html'}}
+{{extend 'sidebar_layout.html'}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+<style>
+  .abs-center {
+  display: flex;
+    justify-content: center;
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+<div class="container-fluid">
+    <center><h2 class="mt-4">ESTADÍSTICA POR MUNICIPIO</h2></center>
+</div>
+{{if dep_id is None:}}
+
+  <div class="container-fluid">
+      <div class="row abs-center">
+        <div id="dep_picker" style="height: 400px; width: 70%;">
+            <form>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Elija el Departamento</label>
+                  <select class="form-control" name="departamento_name" id="dep_select">
+                    {{for dep in departamento:}}    
+                    <option name="departamento_name" value="{{=dep.id}}">{{=dep.name}}</option>
+                    {{pass}}
+                  </select>
+                </div>
+                <div class="form-group">
+                    <input class="btn btn-primary" type="submit" value="ELEGIR">
+                </div>
+            </form>              
+        </div>
+      </div>
+  </div>
+{{else:}}
+    <div class="container-fluid">
+        <div class="row abs-center">
+            <div id="MychartContainer" style="height: 400px; width: 70%;">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <p></p>
+    <br>
+    <!--INICIA TABLA-->
+    <div class="container-fluid">
+        <div><center><h3>DETALLE DE COMERCIOS CON QUEJAS POR REGIÓN</h3></center></div>
+        <div class="row abs-center">
+            
+            <div id="Mygrid" style="height: 400px; width: 70%;">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nombre Comercio</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Municipio</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{id=1}}
+                        {{for registro in registros:}}
+                        <tr>
+                            <th scope="row">{{=id}}{{id+=1}}</th>
+                            <th scope="row">{{=registro.comercio.name}}</th>
+                            <th scope="row">{{=registro.queja.fecha}}</th>
+                            <td>{{=registro.municipio.name}}</td>
+                        </tr>
+                        {{pass}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{{pass}}
+
+
+<script>
+    
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{=XML(labels)}}, 
+            datasets: [{
+                label: 'Cantidad de Quejas',
+                data: {{=data}},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+    </script>

@@ -169,6 +169,15 @@ db.define_table('queja',
                 format='%(name)s')
 db.queja.contenido.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
 db.queja.fecha.requires = IS_DATE(format=T('%Y-%m-%d'), error_message='must be YYYY-MM-DD!')
+
+db.define_table('rango',
+                Field('fecha_inicial', 'date'),
+                Field('fecha_final', 'date'),
+                format='%(name)s')
+db.rango.fecha_inicial.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+db.rango.fecha_final.requires = IS_NOT_EMPTY(error_message=T('Error campos vacíos'))
+db.rango.fecha_inicial.requires = IS_DATE(format=('%Y-%m-%d'), error_message='must be YYYY-MM-DD!')
+db.rango.fecha_final.requires = IS_DATE(format=('%Y-%m-%d'), error_message='must be YYYY-MM-DD!')
 # -------------------------------------------------------------------------
 
 # -------------------------------------------------------------------------
