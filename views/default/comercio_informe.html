@@ -1,0 +1,60 @@
+{{extend 'layout.html'}}
+{{extend 'sidebar_layout.html'}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.0/chart.js"></script>
+<style>
+  .abs-center {
+  display: flex;
+    justify-content: center;
+  }
+
+  .form_div {
+  width: 70%;
+  }
+</style>
+<div class="container-fluid">
+    <center><h2 class="mt-4">ESTADÍSTICA POR MUNICIPIO</h2></center>
+</div>
+{{if dep_id is None:}}
+    {{if municipios is None:}}
+        <div class="container-fluid">
+            <div class="row abs-center">
+                <div id="dep_picker" style="height: 400px; width: 70%;">
+                    <form>
+                        <div class="form-group">
+                        <label for="exampleFormControlSelect1">Elija el Departamento</label>
+                        <select class="form-control" name="departamento_name" id="dep_select">
+                            {{for dep in departamento:}}    
+                            <option name="departamento_name" value="{{=dep.id}}">{{=dep.name}}</option>
+                            {{pass}}
+                        </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="submit" value="ELEGIR">
+                        </div>
+                    </form>              
+                </div>
+            </div>
+        </div>
+    {{else:}}
+    <div class="container-fluid">
+        <div class="row abs-center">
+            <div id="dep_picker" style="height: 400px; width: 70%;">
+                <form>
+                    <div class="form-group">
+                    <label for="exampleFormControlSelect1">Elija el Municipio</label>
+                    <select class="form-control" name="municipio_name" id="mun_select">
+                        {{for mun in municipios:}}    
+                        <option name="municipio_name" value="{{=mun.id}}">{{=mun.name}}</option>
+                        {{pass}}
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="ELEGIR">
+                    </div>
+                </form>              
+            </div>
+        </div>
+    </div>
+    {{pass}}
+{{pass}}

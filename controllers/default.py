@@ -5,6 +5,7 @@
 # -------------------------------------------------------------------------
 
 # ---- example index page ----
+from typing import Tuple
 from gluon.globals import Request
 
 
@@ -352,22 +353,6 @@ def municipio():
     if request.vars:
         dep = request.vars.get("departamento_name")
         
-
-    #comercio_name = request.vars.get("nom_comercio")
-
-
-    #form_elegir_dep = SQLFORM(db.departamento,
-    #                        labels ={'name':'Elija el departamento',})
-
-    #if form_elegir_dep.process().accepted:
-    #   response.flash = 'SU QUEJA HA SIDO REGISTRADA GRACIAS'
-    #   return redirect(URL('default', 'confirmacion'))
-    #elif form_elegir_dep.errors:
-    #   response.flash = 'El formulario tiene errores'
-    #else:
-    #   response.flash = 'Por favor complete el formulario'
-    
-
     count = db.queja.id.count()
     # Consulta para la gráfica
     row_departamento = db(
@@ -409,6 +394,76 @@ def municipio():
 
     return dict(departamento=departamentos, dep_id =dep, labels=labels, data=data, registros= row_departamento_table)
     #FIN municipio
+
+def comercio_informe():
+    #Consulta para elegir departamentos
+    municipios= None
+    dep = None
+    labels=[]
+    data=[]  
+    departamentos = db().select(db.departamento.ALL)
+
+    if request.vars:
+
+        dep_elegido = request.vars.get("departamento_name")
+
+        municipios = db(db.municipio.fk_departamento==dep_elegido).select(db.municipio.ALL)
+
+        mun_elegido_id = request.vars.get("municipio_name")
+
+        if mun_elegido_id is not None:
+            return redirect(URL('comercio_informe_datos', vars=dict(mun_elegido_id=mun_elegido_id)))
+
+    return dict(departamento=departamentos, dep_id =dep, municipios=municipios)
+     #Fin eleccion de departamento y municipio
+
+def comercio_informe_datos():
+    dep = None
+    labels=[]
+    data=[]  
+    mun_elegido_id = request.vars['mun_elegido_id'] 
+    
+    count = db.queja.id.count()
+        # Consulta para la gráfica
+    row_departamento = db(
+                        (db.queja.fk_comercio==db.comercio.id)&
+                        (db.comercio.fk_municipio==db.municipio.id)&
+                        (db.municipio.fk_departamento==db.departamento.id)&
+                        (db.departamento.fk_region==db.region.id)&
+                        (db.municipio.id==mun_elegido_id)
+                        ).select(
+                            db.comercio.name,
+                            count,
+                            groupby = db.comercio.name,
+                            orderby= ~db.queja.fecha,
+                        )
+        # **********Finaliza consulta **********************
+        #EN def norte() arriba está comentado bastante de esta función / ingresamos el nombre del comercio en labels[] 
+        # y la cantidad de veces que se ha colocado una queja   data[]
+        
+    for line in row_departamento:
+        labels.append(line.comercio.name)
+        data.append(line._extra[count])
+
+        # ****Consulta para la tabla ***********
+        # Consulta de quejas por region. Ordenados por region - Obtiene fecha de la queja, nombre del comercio y region a la que pertenece    
+    row_departamento_table = db(
+                                (db.queja.fk_comercio==db.comercio.id)&
+                                (db.comercio.fk_municipio==db.municipio.id)&
+                                (db.municipio.fk_departamento==db.departamento.id)&
+                                (db.departamento.fk_region==db.region.id)&
+                                (db.municipio.id==mun_elegido_id)
+                                ).select(
+                                    db.queja.fecha,
+                                    db.comercio.name,
+                                    db.municipio.name,
+                                    groupby = db.comercio.name,
+                                    orderby= db.departamento.name,
+                                )
+        
+    return dict(dep_id =dep, labels=labels, data=data, registros= row_departamento_table)
+    #return dict(dep_id =dep)
+    #FIN comercio_informe
 
 def rango_fecha():
     #Consulta para elegir departamentos
